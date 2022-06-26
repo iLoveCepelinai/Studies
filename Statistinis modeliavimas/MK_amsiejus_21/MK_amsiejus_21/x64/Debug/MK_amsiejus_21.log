@@ -1,0 +1,18 @@
+﻿  MK_amsiejus_21.cpp
+D:\Users\User\Desktop\Studijos\antras kursas\Monte Karlo alg\Projektinis\MK_amsiejus_21\MK_amsiejus_21\MK_amsiejus_21.cpp(139,27): warning C4244: '=': conversion from 'double' to '__int64', possible loss of data
+D:\Users\User\Desktop\Studijos\antras kursas\Monte Karlo alg\Projektinis\MK_amsiejus_21\MK_amsiejus_21\MK_amsiejus_21.cpp(184,31): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+D:\Users\User\Desktop\Studijos\antras kursas\Monte Karlo alg\Projektinis\MK_amsiejus_21\MK_amsiejus_21\MK_amsiejus_21.cpp(186,31): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+D:\Users\User\Desktop\Studijos\antras kursas\Monte Karlo alg\Projektinis\MK_amsiejus_21\MK_amsiejus_21\MK_amsiejus_21.cpp(193,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Users\User\Desktop\Studijos\antras kursas\Monte Karlo alg\Projektinis\MK_amsiejus_21\MK_amsiejus_21\MK_amsiejus_21.cpp(195,28): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Users\User\Desktop\Studijos\antras kursas\Monte Karlo alg\Projektinis\MK_amsiejus_21\MK_amsiejus_21\MK_amsiejus_21.cpp(225,25): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Users\User\Desktop\Studijos\antras kursas\Monte Karlo alg\Projektinis\MK_amsiejus_21\MK_amsiejus_21\MK_amsiejus_21.cpp(234,14): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Users\User\Desktop\Studijos\antras kursas\Monte Karlo alg\Projektinis\MK_amsiejus_21\MK_amsiejus_21\MK_amsiejus_21.cpp(257,29): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Users\User\Desktop\Studijos\antras kursas\Monte Karlo alg\Projektinis\MK_amsiejus_21\MK_amsiejus_21\MK_amsiejus_21.cpp(265,30): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Users\User\Desktop\Studijos\antras kursas\Monte Karlo alg\Projektinis\MK_amsiejus_21\MK_amsiejus_21\MK_amsiejus_21.cpp(275,15): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Users\User\Desktop\Studijos\antras kursas\Monte Karlo alg\Projektinis\MK_amsiejus_21\MK_amsiejus_21\MK_amsiejus_21.cpp(291,21): warning C4804: '<': unsafe use of type 'bool' in operation
+D:\Users\User\Desktop\Studijos\antras kursas\Monte Karlo alg\Projektinis\MK_amsiejus_21\MK_amsiejus_21\MK_amsiejus_21.cpp(292,26): warning C4804: '<': unsafe use of type 'bool' in operation
+D:\Users\User\Desktop\Studijos\antras kursas\Monte Karlo alg\Projektinis\MK_amsiejus_21\MK_amsiejus_21\MK_amsiejus_21.cpp(293,26): warning C4804: '<': unsafe use of type 'bool' in operation
+D:\Users\User\Desktop\Studijos\antras kursas\Monte Karlo alg\Projektinis\MK_amsiejus_21\MK_amsiejus_21\MK_amsiejus_21.cpp(294,26): warning C4804: '<': unsafe use of type 'bool' in operation
+D:\Users\User\Desktop\Studijos\antras kursas\Monte Karlo alg\Projektinis\MK_amsiejus_21\MK_amsiejus_21\MK_amsiejus_21.cpp(295,26): warning C4804: '<': unsafe use of type 'bool' in operation
+D:\Users\User\Desktop\Studijos\antras kursas\Monte Karlo alg\Projektinis\MK_amsiejus_21\MK_amsiejus_21\MK_amsiejus_21.cpp(296,26): warning C4804: '<': unsafe use of type 'bool' in operation
+  MK_amsiejus_21.vcxproj -> D:\Users\User\Desktop\Studijos\antras kursas\Monte Karlo alg\Projektinis\MK_amsiejus_21\x64\Debug\MK_amsiejus_21.exe

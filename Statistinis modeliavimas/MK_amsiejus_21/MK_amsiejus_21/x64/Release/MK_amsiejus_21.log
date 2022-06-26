@@ -1,0 +1,31 @@
+﻿  MK_amsiejus_21.cpp
+D:\Users\User\Desktop\Studijos\antras kursas\Monte Karlo alg\Projektinis\MK_amsiejus_21\MK_amsiejus_21\MK_amsiejus_21.cpp(151,27): warning C4244: '=': conversion from 'double' to '__int64', possible loss of data
+D:\Users\User\Desktop\Studijos\antras kursas\Monte Karlo alg\Projektinis\MK_amsiejus_21\MK_amsiejus_21\MK_amsiejus_21.cpp(196,31): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+D:\Users\User\Desktop\Studijos\antras kursas\Monte Karlo alg\Projektinis\MK_amsiejus_21\MK_amsiejus_21\MK_amsiejus_21.cpp(198,31): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+D:\Users\User\Desktop\Studijos\antras kursas\Monte Karlo alg\Projektinis\MK_amsiejus_21\MK_amsiejus_21\MK_amsiejus_21.cpp(205,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Users\User\Desktop\Studijos\antras kursas\Monte Karlo alg\Projektinis\MK_amsiejus_21\MK_amsiejus_21\MK_amsiejus_21.cpp(207,28): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Users\User\Desktop\Studijos\antras kursas\Monte Karlo alg\Projektinis\MK_amsiejus_21\MK_amsiejus_21\MK_amsiejus_21.cpp(237,25): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Users\User\Desktop\Studijos\antras kursas\Monte Karlo alg\Projektinis\MK_amsiejus_21\MK_amsiejus_21\MK_amsiejus_21.cpp(246,14): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Users\User\Desktop\Studijos\antras kursas\Monte Karlo alg\Projektinis\MK_amsiejus_21\MK_amsiejus_21\MK_amsiejus_21.cpp(269,29): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Users\User\Desktop\Studijos\antras kursas\Monte Karlo alg\Projektinis\MK_amsiejus_21\MK_amsiejus_21\MK_amsiejus_21.cpp(277,30): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Users\User\Desktop\Studijos\antras kursas\Monte Karlo alg\Projektinis\MK_amsiejus_21\MK_amsiejus_21\MK_amsiejus_21.cpp(287,15): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Users\User\Desktop\Studijos\antras kursas\Monte Karlo alg\Projektinis\MK_amsiejus_21\MK_amsiejus_21\MK_amsiejus_21.cpp(315,20): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+D:\Users\User\Desktop\Studijos\antras kursas\Monte Karlo alg\Projektinis\MK_amsiejus_21\MK_amsiejus_21\MK_amsiejus_21.cpp(318,15): warning C4305: '=': truncation from 'double' to 'float'
+D:\Users\User\Desktop\Studijos\antras kursas\Monte Karlo alg\Projektinis\MK_amsiejus_21\MK_amsiejus_21\MK_amsiejus_21.cpp(327,43): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Users\User\Desktop\Studijos\antras kursas\Monte Karlo alg\Projektinis\MK_amsiejus_21\MK_amsiejus_21\MK_amsiejus_21.cpp(326,11): warning C4101: 'V1': unreferenced local variable
+D:\Users\User\Desktop\Studijos\antras kursas\Monte Karlo alg\Projektinis\MK_amsiejus_21\MK_amsiejus_21\MK_amsiejus_21.cpp(326,15): warning C4101: 'V2': unreferenced local variable
+D:\Users\User\Desktop\Studijos\antras kursas\Monte Karlo alg\Projektinis\MK_amsiejus_21\MK_amsiejus_21\MK_amsiejus_21.cpp(367,27): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Users\User\Desktop\Studijos\antras kursas\Monte Karlo alg\Projektinis\MK_amsiejus_21\MK_amsiejus_21\MK_amsiejus_21.cpp(370,27): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Users\User\Desktop\Studijos\antras kursas\Monte Karlo alg\Projektinis\MK_amsiejus_21\MK_amsiejus_21\MK_amsiejus_21.cpp(377,27): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Users\User\Desktop\Studijos\antras kursas\Monte Karlo alg\Projektinis\MK_amsiejus_21\MK_amsiejus_21\MK_amsiejus_21.cpp(380,27): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Users\User\Desktop\Studijos\antras kursas\Monte Karlo alg\Projektinis\MK_amsiejus_21\MK_amsiejus_21\MK_amsiejus_21.cpp(396,25): warning C4244: '=': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+  Generating code
+  10 of 210 functions ( 4.8%) were compiled, the rest were copied from previous compilation.
+    1 functions were new in current compilation
+    9 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  MK_amsiejus_21.vcxproj -> D:\Users\User\Desktop\Studijos\antras kursas\Monte Karlo alg\Projektinis\MK_amsiejus_21\x64\Release\MK_amsiejus_21.exe
