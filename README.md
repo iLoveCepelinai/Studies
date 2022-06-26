@@ -7,7 +7,9 @@ This was the most recent semester I had. One of the main subject was writing of 
 * Regresine analize - Regression analysis
 ## Quick links
 * [The Thesis](https://github.com/iLoveCepelinai/Studies/blob/sixth-semester/Projektinis%20darbas/saules_elektrines_amsiejus_uzpelkis.pdf)
+* [Colaborative work that sums up regression course](https://github.com/iLoveCepelinai/Studies/blob/sixth-semester/Regresine%20analize/Tiriamasis%20darbas/projektinis_darbas_salvija_sandra_iveta_jekaterina_matas.pdf)
 
 ## Images
 * ![Thesis scatter plot](https://github.com/iLoveCepelinai/Studies/blob/sixth-semester/Projektinis%20darbas/scatter_thesis.jpg)
 * ![Clustering with t-SNE](https://github.com/iLoveCepelinai/Studies/blob/sixth-semester/Pap%20duom%20viz/3%20u%C5%BEduotis/clustering_image.jpg)
+* ![Survival regression](https://github.com/iLoveCepelinai/Studies/blob/sixth-semester/Regresine%20analize/Tiriamasis%20darbas/survival_image.jpg)
