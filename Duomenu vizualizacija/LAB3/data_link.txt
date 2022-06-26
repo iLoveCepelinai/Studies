@@ -1,0 +1,9 @@
+Kadangi failas labai didelis, i TEAMS nekeliu. Nuoroda i regitros svetaine:
+https://www.regitra.lt/lt/paslaugos/duomenu-teikimas/atviri-duomenys-1/transporto-priemones-3
+
+Siustis reikia:
+Atviri įregistruotų kelių transporto priemonių parko duomenys (20__-__-__)
+
+Pastaba:
+Regitros duomenys naujinami kas kazkiek laiko, tad jei kursite grafikus su naujais duomenimis, jie gali 
+skirtis nuo musu pristatytu projekte.
