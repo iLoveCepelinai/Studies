@@ -3,7 +3,6 @@ This semester was the most practical so far, introducing me better Big Data proc
 * DI pagrindai - AI basics;
 * Didziuju duomenu programiniai irankiai - Big Data analysis tools;
 * Tiesiniai modeliai - Linear models;
-* Neparametrine statistika - Non-parametric statistics;
 * Duomenu tvarkyba su R - Data management with R.
 
 ## About Big Data analysis tools
