@@ -12,6 +12,7 @@ This was a project to test our capability to work with parallel programming, Lin
 ## Linear models
 This subject gave me a good understanding of regression analysis. This topic built a foundation of my regression, classification, predictions knowledge.
 
+## Some quick links / images from my work
 Some of my proudest works in this semester are:
 * [Image classification](https://github.com/iLoveCepelinai/Studies/blob/Fifth-semester/DI%20pagrindai/Uzduotis4/uzduotis4.ipynb)
 
