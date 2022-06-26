@@ -10,3 +10,4 @@ This was the most recent semester I had. One of the main subject was writing of 
 
 ## Images
 * ![Thesis scatter plot](https://github.com/iLoveCepelinai/Studies/blob/sixth-semester/Projektinis%20darbas/scatter_thesis.jpg)
+* ![Clustering with t-SNE](https://github.com/iLoveCepelinai/Studies/blob/sixth-semester/Pap%20duom%20viz/3%20u%C5%BEduotis/clustering_image.jpg)
