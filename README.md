@@ -1,5 +1,8 @@
-# Studies
-## Introduction
-This repository is for tasks that I had to complete as a "Data Science" student during my bachelor's degree (2019-2023 (still ongoing)) in Vilnius University. These projects represent the minimum of what I can do. Most of the semesters will be seperated into branches, there you will find folders with subjects that I had during that semester.
-## Warning
-Most of the projects are in Lithuanian language. I will translate all names of the subjects in **readme** files of each semester branch.
+# Fourth semester
+This semester features more projects. One of them is "Algorithm theory" which is oriented in finding fastest algorithms. Since I had to create a new repo for that course, I will link it below:
+* [Algorith theory](https://github.com/iLoveCepelinai/Algoritmu-teorija)
+Other courses that I had are:
+* Duomenų vizualizacija - data visualisation
+* Imčių metodai - sampling methods
+* Statistinis modeliavimas - statistical modelling
+* Parametrinė statistika - Parametric statistics
