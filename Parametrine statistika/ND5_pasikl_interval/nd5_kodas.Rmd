@@ -1,0 +1,94 @@
+---
+title: "ND5 Pasikliautinieji intervalai"
+author: "Matas Amšiejus"
+date: "3/20/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 1
+
+Duomenys: didumo $n=100$ imtis, gauta stebint a.d. $Y\sim N(\mu,\sigma^2)$. Raskite vidurkio ir dispersijos įverčius ir pasikliovimo intervalus.
+```{r}
+n<-100
+Q<-0.95
+duom<-rnorm(n,1,2)# normalusis skirstinys su vidurkiu 1 ir dispersija 4
+vid<-mean(duom);vid# vidurkio ivertis
+disp<-var(duom);disp# dispersijos ivertis
+s<-sd(duom)# standartinio nuokrpio ivertis
+# alfa=(1-0.95)/2=0.025
+kairys<-vid-qt(0.025, n-1, lower.tail = FALSE)*s/sqrt(n);kairys
+desinys<-vid+qt(0.025, n-1, lower.tail = FALSE)*s/sqrt(n);desinys
+
+c(kairys, desinys)
+```
+Dabar ieškosime dispersijos pasikliovimo intervalo:
+```{r}
+k<-(n-1)*disp/qchisq(0.025,n-1,lower.tail = FALSE)
+d<-(n-1)*disp/qchisq(1-0.025,n-1,lower.tail = FALSE)
+c(k,d)
+```
+
+
+## 2
+
+Duomenys: chemija.txt. Raskite vidurkio taškinį įvertį ir pasikliovimo intervalą tardami, kad buvo stebimas lognormalusis a.d..
+```{r}
+chemija<-read.table("chemija.txt",sep="")
+rez<-data.frame(smpl=as.vector(as.matrix(chemija[,1:10])))
+```
+
+## 3
+
+Kad įvertinti tam tikro gamintojo defektingų mikroprocesorių dalį, imtys po 5 mikroprocesorius buvo išrinktos atsitiktinai 10 kartų per dieną. Jie patikrinami (geras; defektingas) ir tegu $X$ žymi defektingų mikroprocesorių skaičių kiekvienoje didumo 5 grupėje. Duomenys:\\
+$1\ 0\ 1\ 2\ 0\ 0\ 0\ 0\ 1\ 0\ $. Tada $X$ turi binominį skirstinį $X\sim B(N=5, p)$(?kodėl N, o ne k?). Raskite parametro $p$ taškinį įvertį ir pasikliovimo intervalą.
+```{r}
+i_sk<-10
+n<-5
+rez<-c(1,0,1,2,0,0,0,0,1,0)
+S_n<-sum(rez);S_n
+N<-i_sk*5
+p_ivert<-S_n/N;p_ivert
+```
+Ieškosime pasikliovimo intervalo ($Q=0.95$). $\alpha/2=0.025$.
+```{r}
+k<-qbeta(1-0.025, S_n, N-S_n+1, lower.tail = FALSE)
+d<-qbeta(0.025,S_n+1,N-S_n,lower.tail = FALSE)
+c(k,d)
+```
+
+
+## 4
+
+Modeliuokite a.d. $X\sim P(\lambda)$ (Puasono skirstinys su parametru $\lambda$) didumo $n=50$ imtį. 
+Raskite parametro $\lambda$ taškinį ir intervalinį $(Q=0.95)$ įverčius.
+```{r}
+n<-50
+puasonas<-rpois(n, 2)# tarkime lambda bus = 2
+lambda_iv<-mean(puasonas);lambda_iv
+```
+Ieškome intervalinio įverčio, kur $\alpha=0.025$:
+```{r}
+T_n<-sum(puasonas)
+k<-qchisq(1-0.025,2*T_n,lower.tail = FALSE)/(2*n)
+d<-qchisq(0.025,2*T_n+2,lower.tail = FALSE)/(2*n)
+c(k,d)
+```
+
+## 5
+
+Patikrinus $520$ detalių, kurias pagamino automatinės staklės, buvo rastos $55$ brokuotos detalės. 
+Raskite šio įvykio tikimybės taškinį įvertį ir pasikliovimo intervalą (pasikliovimo lygmuo $0,987$).
+```{r}
+N<-520
+n<-55
+p<-su_poz/N;p
+
+k<-p-qnorm(0.0065,lower.tail = FALSE)*sqrt(1-n/N)*sqrt(p*(1-p)/(n-1))
+d<-p+qnorm(0.0065,lower.tail = FALSE)*sqrt(1-n/N)*sqrt(p*(1-p)/(n-1))
+
+c(k,d)
+```

@@ -1,0 +1,121 @@
+---
+title: "Atsitiktinių dydžių generavimas"
+author: "Matas Amšiejus"
+date: "2/28/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+1) Modeliuokite a.d. X, įgyjančio reikšmes 1, 3, 4, 5 su tikimybėmis 0.15, 0.4, 0.25, 0.2 atitinkamai didumo n=50 imtį. Nubraižykite horizontalių arba vertikalių stulpelių diagramą (dažnių, sukauptųjų dažnių). Sudarykite dažnių lentelę.
+
+```{r}
+x<-c(1,3,4,5)
+p<-c(0.15,0.4,0.25,0.2)
+n<-50
+X<-sample(x,n,TRUE,prob = p);X
+
+duom<-data.frame(x=X);duom
+
+library(ggplot2)
+ggplot(duom,aes(x=factor(X)))+ geom_bar(fill = "#0073C2FF",aes(y = (..count..)/sum(..count..))) + scale_y_continuous(labels=scales::percent) + labs(x="Reikšm˙es", y="Santykinis Dažnis")
+
+ggplot(duom,aes(x=factor(X)))+
+geom_bar(fill = "#0073C2FF",aes(y = cumsum(..count..)/sum(..count..))) +
+scale_y_continuous(labels=scales::percent) +
+labs(x="Reikšm˙es", y="Sukauptieji santykiniai dažniai")
+```
+
+2) Sudarykite a.d. $Y\sim N(\mu,\sigma^2)$ didumo $n=100$ imtį. Nubraižykite:\
+a) histogramą ir palyginkite su teoriniu tankiu;\
+b) empirinės pasiskirstymo funkcijos grafiką ir palyginkite su teorine.\
+**a)**
+```{r}
+Y<-rnorm(100,1,2)
+duom<-data.frame(x=Y)
+ggplot(duom, aes(x=Y))+ geom_histogram(aes(y=..density..),breaks=seq(min(duom$x), max(duom$x), by=0.5), fill="lightblue") + scale_x_continuous(breaks=seq(min(duom$x), max(duom$x), by=0.5), labels=round(seq(min(duom$x), max(duom$x), by=0.5),1))+ geom_vline(aes(xintercept=mean(Y)), color="blue", linetype="dashed", size=1)+ stat_function(fun=~dnorm(.x,1,2), color="red",size=2)+ ggtitle("Imties histograma")+ theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+**b)**
+```{r}
+plot(ecdf(duom$x))
+curve(pnorm(x, mean(duom$x), sd(duom$x)),
+from = -3, to = 3, add = TRUE, col='blue', lwd = 2)
+```
+```{r}
+Y<-rt(n=100, df=5);Y
+duom<-data.frame(x=Y)
+grafikas5<-ggplot(duom, aes(x=Y))+geom_histogram(aes(y=..density..));grafikas5
+```
+
+Kitas būdas
+```{r}
+ggplot(duom, aes(x=Y))+
+stat_ecdf(geom="line") +
+stat_function(fun=~pnorm(.x,1,2),color="red",size=1)
+```
+3) Sudarykite a.d. $Y\sim S(n)$ didumo n=100 imtį (Stjudento skirstinys).
+```{r}
+rez1<-rt(100,10)
+rez1
+```
+
+
+4) Pateikti duomenys, apibūdinantys tam tikro elemento koncentraciją nesureagavusiame likutyje pasibaigus cheminiam procesui (chemija.txt):\
+a) raskite empirinius vidurkio, dispersijos, asimetrijos ir eksceso analogus;\
+b) palyginkite empirinius pasiskirstymo funkcijos ir tankio analogus su normaliąja ir lognormaliąja pasiskirstymo funkcija ir tankiu. Kuris iš tų skirstinių tiksliau aprašo stebėjimo duomenis.\
+
+**a)**
+```{r}
+library(moments)
+
+chemija<-read.table("chemija.txt",sep="");chemija
+rez<-data.frame(smpl=as.vector(as.matrix(chemija[,1:10])))
+rez1<-as.vector(as.matrix(chemija[,1:10]));rez1
+vid<-mean(rez1);vid
+disp<-var(rez1);disp
+asimetr<-skewness(rez1);asimetr
+ekscesas<-kurtosis(rez1);ekscesas #(tik čia neatimta 3)
+```
+**b)**
+```{r}
+ggplot(rez, aes(x=smpl))+
+geom_histogram(aes(y=..density..),breaks=seq(min(rez$smpl), max(rez$smpl), 5),fill="lightblue")+
+scale_x_continuous(breaks=seq(min(rez$smpl), max(rez$smpl), by=5),
+labels=round(seq(min(rez$smpl), max(rez$smpl), by=5),0))+
+geom_vline(aes(xintercept=mean(smpl)),
+color="blue", linetype="dashed", size=1)+
+stat_function(fun=~dnorm(.x,mean = mean(rez$smpl), sd = sd(rez$smpl)),color="red") +
+stat_function(fun=~dlnorm(.x,mean(log(rez$smpl)),var(log(rez$smpl))),color="blue")+
+ggtitle("Imties histograma; std normaliojo ir lognormaliojo tankio f-ju˛ grafikas")+
+theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+```{r}
+library(dplyr)
+
+#normalioji pas fja
+df <- data.frame( x = c(rnorm(150, mean(rez1), sd(rez1)),
+rez$smpl),
+group = gl(2, 150))
+df %>%
+ggplot(aes(x=x,col=group))+
+stat_ecdf(size=1)+
+scale_colour_discrete(name="Kreiv˙es",labels=c("Normalioji","Empirin˙e"))+
+ggtitle("Pasiskrstymo f-jos")
+
+#lognormine pas fja
+rez2<-log(as.vector(as.matrix(chemija[,1:10])))
+#
+df <- data.frame( x = c(rnorm(150, mean(rez2), sd(rez2)),
+rez$smpl),
+group = gl(2, 150))
+#
+df %>%
+ggplot(aes(x=x,col=group))+
+stat_ecdf(size=1)+
+scale_colour_discrete(name="Kreiv˙es",labels=c("Normalioji","Empirin˙e"))+
+ggtitle("Pasiskrstymo f-jos")
+```
+

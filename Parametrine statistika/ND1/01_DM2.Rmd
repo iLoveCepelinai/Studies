@@ -1,0 +1,141 @@
+---
+title: "ND1"
+author: "Matas Amšiejus"
+date: "2/16/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## 1.
+
+Apskaičiuokite pasiskirstymo funkcijos reikšmę F(x), tankio funkcijos reikšmę f(x) , x=0.6, kai skirstinys\
+a) standartinis normalusis\
+b) normalusis su vidurkiu 3 ir dispersija 4.\
+
+**a)**
+```{r}
+pnorm(0.6)# randa standartinio normaliojo skirstinio pasiskirstymo f-jos reikšmę
+dnorm(0.6)# randa standartinio normaliojo skirstinio tankio f-jos reikšmę
+```
+**b)**
+```{r}
+pnorm(0.6, 3, 2)# normaliojo skirstinio su vid = 3 ir disp = 4 pasiskirstymo f-jos reikšmę
+dnorm(0.6, 3, 2)# normaliojo skirstinio su vid = 3 ir disp = 4 tankio f-jos reikšmę
+```
+
+## 2.
+
+Apskaičiuokite p-ąjį kvantilį (p=0.95), kai skirstinys\
+a) standartinis normalusis;\
+b) Stjudento;\
+c) Fišerio;\
+d) chi kvadrato.\
+
+**a)**
+```{r}
+qnorm(0.95)# standartinio normaliojo skirstinio 0.95 kvantilis
+```
+**b)**
+```{r}
+qt(0.95, 5)# Stjudento skirstinio 0.95 kvantilis su laisvės laipsniu 5
+```
+**c)**
+```{r}
+qf(0.95, 10, 3)# Fišerio skirstinio 0.95 kvantilis su laisvės laipsniais 10 ir 3
+```
+**d)**
+```{r}
+qchisq(0.95, 5)# Chi kvandrato skirstinio 0.95 kvantilis su laisvės laipsniu 5
+```
+
+## 3.
+
+Apskaičiuokite p-ąją kritinę reikšmę (p=0.1), kai skirstinys:\
+a) standartinis normalusis;\
+b) Stjudento;\
+c) Fišerio skirstinys;\
+d) chi kvadrato skirstinys.\
+
+**a)**
+```{r}
+qnorm(0.9)# tiesiog ieškome 1-p - tojo kvantilio (galioja visiems)
+```
+**b)**
+```{r}
+qt(0.9, 5)
+```
+**c)**
+```{r}
+qf(0.9, 10, 3)
+```
+**d)**
+```{r}
+qchisq(0.9, 5)
+```
+
+## 4.
+
+Apskaičiuokite medianą, kvartilius, 70-ąjį ir 80-ajį procentilį, kai skirstinys\
+a) normalusis;\
+b) binominis.\
+
+**a)**\
+Imkime normalųjį skirstinį su parametrais $\mu=1$ ir $\sigma^2=4$: $X\sim N(1,4)$. Tai mediana = moda = vidurkis = 1. 
+```{r}
+qnorm(0.25, 1, 2)# Q1 (arba 25 procentilis)
+qnorm(0.75, 1, 2)# Q3 (arba 75 procentilis)
+qnorm(0.70, 1, 2)# 70 procentilis
+qnorm(0.80, 1, 2)# 80 procentilis
+```
+**b)**\
+Imkime binominį skirstinį su parametrais $n=100$ ir $p=0.6$: $X\sim Bin(100, 0.6)$. Tai, jei $n\cdot p>5$ ir $n\cdot q>5$
+galima tarti $X\approx N(np, npq)$. Tai mediana = vidurkis = $n\cdot p = 100\cdot 0.6 =60$.
+```{r}
+vid<-100*0.6
+stNuok<-sqrt(100*0.6*0.4)
+qnorm(0.25, vid, stNuok)# Q1
+qnorm(0.75, vid, stNuok)# Q2
+qnorm(0.70, vid, stNuok)# 70 procentilis (kvantilis)
+qnorm(0.80, vid, stNuok)# 80 procentilis (kvantilis)
+```
+
+## 5.
+
+Tarkime, kad atsitiktinis dydis X turi normalųjį skirstinį su vidurkiu 1 ir dispersija 2,25.\
+ a) Apskaičiuokite tikimybę $P(| X |\leq 1,5)$.\
+ b) Raskite tokį t, kad $P(X > t) = 0,05$.\
+ $X\sim N(1, 2.25)$\
+ **a)**\
+ $P(|X|\leq 1.5)=P(-1.5\leq X\leq 1.5) =P(X\leq1.5)-\Phi(-1.5\leq X) =\Phi(\frac{1.5-1}{\sqrt{2.25}})-\Phi(\frac{-1.5-1}{\sqrt{2.25}}) =\Phi(1/3)-\Phi(-5/3)=\Phi(1/3)-1+\Phi(5/3)\approx 0.63-1+0.95 =0.58$
+```{r}
+pnorm(1.5, 1, sqrt(2.25))-pnorm(-1.5, 1, sqrt(2.25))
+```
+**b)**\
+$P(X>t)=1-P(X\leq t)=1-\Phi(\frac{t-1}{\sqrt{2.25}})=1-\Phi(\frac{t-1}{1.5})=0.05$; $\Phi(\frac{t-1}{1.5})=0.95$; $\frac{t-1}{1.5}\approx 1.64$; $t-1=2.46$; $t=3.46$
+```{r}
+qnorm(0.95)*1.5+1
+```
+
+## 13.
+
+Tarkime, kad atsitiktinis dydis X turi normalųjį skirstinį su vidurkiu 2,1 ir dispersija 3,1.\
+Apskaičiuokite tikimybę $P(| X - 2,7 |> 3,8)$.\
+$X\sim N(2.1, 3.1)$\
+$P(|X-2.7|>3.8)=1-P(|X-2.7|\leq3.8)=1-P(-3.8\leq X-2.7\leq 3.8)=1-P(-1.1\leq X \leq 6.5)=1-P(X\leq6.5)+P(-1.1\leq X) = 1-\Phi(\frac{6.5-2.1}{\sqrt{3.1}})+\Phi(\frac{-1.1-2.1}{\sqrt{3.1}})\approx 1-\Phi(2.5)+\Phi(-1.82)=1-\Phi(2.5)+1-\Phi(1.82) \approx 2-0.994-0.966=0.04$
+```{r}
+1-pnorm(6.5, 2.1, sqrt(3.1))+pnorm(-1.1,2.1,sqrt(3.1))
+```
+
+## 14.
+
+Tarkime, kad atsitiktinis dydis X turi normalųjį skirstinį su vidurkiu 3,4 ir dispersija 2,8.\
+Raskite tokį t, kad $P(X + 2,2 \leq t) = 0,651$.\
+$X\sim N(3.4, 2.8)$\
+$P(X+2.2\leq t)=P(X\leq t-2.2)=\Phi(\frac{t-2.2-3.4}{\sqrt{2.8}})\approx\Phi(\frac{t-5.6}{1.67})=0.651$; $\frac{t-5.6}{1.67}=0.39$;  $t-5.6=0.65$; $t=6.25$
+```{r}
+qnorm(0.651)*1.67+5.6
+```

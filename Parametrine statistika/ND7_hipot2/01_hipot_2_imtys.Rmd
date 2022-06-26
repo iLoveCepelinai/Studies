@@ -1,0 +1,173 @@
+---
+title: "Hipotezės su 2 imtimis"
+author: "Matas Amšiejus"
+date: "5/10/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(ggpubr)
+library(dplyr)
+```
+
+## 1)
+**Tyrimo tikslas – nustatyti, ar vidutinė duomenų rinkinio analizės kaina, naudojant statistinį paketą A yra tokia pati kaip naudojant paketą B. Lentelėje pateikta 15 duomenų rinkinių, kurie buvo analizuoti statistiniu paketu A (kintamasis X) ir statistiniu paketu B (kintamasis Y), analizės kaina.**
+```{r}
+Xi<-c(0.26,0.24,0.26,0.22,0.25,0.23,0.18,0.25,0.19,0.25,0.29,0.25,0.23,0.2,0.25)
+Yi<-c(0.29,0.32,0.24,0.33,0.28,0.27,0.25,0.26,0.33,0.33,0.33,0.28,0.30,0.24,0.32)
+data1<-data.frame(Xi,Yi)
+```
+**Sprendimas**\
+Vadinasi mums duotos 2 imtys, kurios yra susijusios (tiriami tie patys duomenys, tik kitais paketais). Vadinasi imtys (kainos) priklausomos. Galime patikrinti ar iš tiesų dydis pasiskirstęs pagal normalųjį skirstinį:
+```{r}
+ggqqplot(data1$Xi,ylab = "Kaina", ggtheme = theme_minimal())
+shapiro.test(data1$Xi)
+```
+```{r}
+ggqqplot(data1$Yi,ylab = "Kaina", ggtheme = theme_minimal())
+shapiro.test(data1$Yi)
+```
+Keista, nes pagal kvantilių grafiką atrodė, jog Xi nepasisiskirstęs pagal N, o Yi - pasiskirstęs, bet Shapiro test rodo kitaip (Yi pasiskirstęs, bet ant ribos)\
+Dėl įdomumo patikrinkime koreliaciją tarp imčių:
+```{r}
+cor.test(data1$Xi,data1$Yi)
+```
+Išties gauname, kad su pasikliovimo lygmeniu $\alpha=0.05$, o $p=0.4479$ egzisutuoja koreliacija tarp imčių. Tada
+```{r}
+t.test(data1$Xi,data1$Yi,paired = TRUE)
+```
+Gauname, kad p-value $p<\alpha$, kur $\alpha=0.05$, todėl hipotezę atmetame, nes vidurkiai statistiškai reišmingai skiriasi. Jei tiksliai suprantu, antras yra 0.0547 didesnis už pirmą.\
+
+Taip pat dėl įdomumo galime ieškoti skirtumų ir tada pritaikyti t.test vienai imčiai. Taigi randame skirtumus:
+```{r}
+Zi<-Xi-Yi;Zi
+```
+Dabar atnaujinsime hipotezę, t.y. $H_0:\mu_z=0$, $H_1:\mu\neq0$. Tikriname su t.test:
+```{r}
+t.test(Zi)
+```
+
+
+
+## 2)
+**Tyrimo tikslas palyginti laiką, kuris reikalingas patikrinti laidų sujungimus ir izoliaciją dviejų tipų srovės pertraukikliuose. Pirmoji populiacija susideda iš visų vakuumo tipo srovės pertraukiklių, o antroji populiacija iš visų oro-magnetinių srovės pertraukiklių. Buvo atrinktos paprastos atsitiktinės imtys iš kiekvienos populiacijos ir ištirtas kiekvienas į imtį patekęs gaminys (matuotas laikas).**\
+```{r}
+vak<-c(3.0,5.3,6.9,4.1,8.0,6.7,6.3,7.1,4.2,7.2,5.1,5.5,5.8)
+oroMag<-c(7.1,9.3,8.2,10.4,9.1,8.7,12.1,10.7,10.6,10.5,11.3,11.5)
+```
+**Sprendimas**\
+Pagal sąlygą atrodo, kad buvo paimtos 2 nepriklausomos imtys, tuo labiau, nes imčių dydžiai nevienodi. Tikrinkime, ar dydžiai pasiskirstę pagal N skirstinį:
+```{r}
+ggqqplot(vak,ylab = "Laikas", ggtheme = theme_minimal())
+ggqqplot(oroMag,ylab = "Laikas", ggtheme = theme_minimal())
+```
+Iš grafikų atrodo, kad abi imtys išties pasiskirsčiusios pagal N skirstinį. Dabar tikrinkime, ar dispersijos lygios:\
+```{r}
+var.test(vak,oroMag)
+```
+Gauname, kad statistiškai dispersijos nesiskiria su p-value $0.9131>0.05=\alpha$. Tada keliame hipotezę ir alternatyvą, bet kadangi tikslas palyginti laiką, manau, kad turėtume ieškoti, kad kažkuris didesnis. Todėl pirma galime tiesiog patikrinti vidurkius:
+```{r}
+vid_vak<-mean(vak);vid_vak
+vid_oro<-mean(oroMag);vid_oro
+```
+Antro vidurkis didesnis, todėl tikrinsime hipotezę:\
+$H_0:\mu_{vak}\leq\mu_{oro}$\
+$H_1:\mu_{vak}>\mu_{oro}$
+```{r}
+t.test(vak, oroMag, alternative = "greater", var.equal = TRUE)
+```
+Gauname, kad pirmos imties vidrukis statistiškai reikšmingai skiriasi (yra mažesnis) negu antros.
+
+
+
+## 3) 
+**Tikrinama hipotezė, kad impulso atpažinimo paklaidos dispersija nepriklauso nuo jo intensyvumo. Buvo atlikti du nepriklausomi eksperimentai. Impulsas, kurio intensyvumas lygus 10 sąlyginių vienetų, buvo įvertintas: 9 9 8 10 12 13 10 10 vienetų; impulsas, kurio intensyvumas 20 sąlyginių vienetų, buvo įvertintas 15 16 17 23 22 20 21 24 27**\
+```{r}
+d10<-c(9,9,8,10,12,13,10,10)
+d20<-c(15,16,17,23,22,20,21,24,27)
+```
+**Sprendimas**
+Iš sąlygos gauname hipotezę:\
+$H_0:\sigma^2_1=\sigma^2_2$;\
+$H_1:\sigma^2_1\neq\sigma^2_2$.\
+```{r}
+var.test(d10,d20)
+```
+Tagi gauname, kad p-value$=0.031<0.05=\alpha$, todėl hipotezę, kad dispersijos nesiskiria priklausomai nuo impulso intensyvumo, atmetame.\
+
+
+
+## 4)
+**Tiriant nutekamųjų vandenų poveikį ežero vandeniui, nitratų koncentracija vandenyje matuojama rankiniu 
+metodu. Siūlomas naujas automatinis metodas. Jeigu yra stipri teigiama koreliacija tarp matavimų, gautų šiais 
+metodais, tai rankinis metodas, bus keičiamas nauju automatiniu. Duomenys:**\
+```{r}
+Xr<-c(25,40,120,75,150,300,270,400,450,575)
+Ya<-c(30,80,150,80,200,350,240,320,470,583)
+```
+**Išvadas formuluokite naudodami Pearson koreliacijos koeficientą.**\
+*Pastaba.* Pearson koeficientas naudojamas, kai yra tiesinis ryšys tarp kintamųjų, jei sąryšis netiesinis jo naudoti negalime. Prieš skaičiuojant Pearson koreliacijos koeficientą reikia patikrinti ar ryšys tiesinis, pvz. nubraižyti duomenų sklaidos diagramą
+**Sprendimas**\
+Pirma reikia patikrinti, ar ryšys yra tiesinis:
+```{r}
+data4<-data.frame(Xr,Ya) #ggscatter reikia tureti data.frame pasidarius
+ggscatter(data = data4, x="Xr", y="Ya", add = "reg.line")
+```
+Matome, kad ryšys tarp kintamųjų yra tiesinis. Vadinasi tereikia patikrinti, ar egzistuoja stipri teigiama koreliacija su Pearson koreliacijos koeficientu. Mūsų hipotezė:
+$H_0:kor\geq0$(manau, kad reikia, jog būtų $>0.5$)\
+$H_1:kor<0$
+```{r}
+cor.test(Xr, Ya, alternative="less", method = "pearson")
+```
+Matome, kad koreliacijos koficientas $=0.9778$ su p-value$=1>0.05=\alpha$. Todėl galime tvirtinti, kad verta keisti rankinį metodą į naują automatinį.
+
+
+
+## 5)
+**Lentelėse pateikti duomenys apie Li2O ir Rb2O kiekį (0.01 procentais) mikroklinuose iš albitinių pegmatitų ir albitinių-spodumeninių pegmatitų.**
+```{r}
+# pirma lentele
+Li20<-c(0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,1.5,0.7,3.5,1.2,2.5,2.5,0.5,0.5,0.5,0.8,0.2,0.2)
+Rb20<-c(22,18,18,22,22,53,38,15,84,7,90,80,80,88,25,40,40,40,27,19)
+albit<-data.frame(Li20,Rb20)
+# antra lentele
+Li20<-c(0.5,0.8,1.3,2.5,1.5,0.6,0.5,1.1,0.5,1.0,0.7,1.0,0.2,1.4,1.2,2.4,1.2,0.5,0.5,0.6)
+Rb20<-c(43,40,46,42,43,38,40,46,39,50,50,49,50,46,51,51,43,51,43,48)
+spodum<-data.frame(Li20,Rb20)
+```
+**a)Esant 5 procentų reikšmingumo lygmeniui, patikrinkite hipotezę, kad Rb2O kiekio dispersija abiejų rūšių pegmatituose nesiskiria.**\
+**b)Esant 5 procentų reikšmingumo lygmeniui, patikrinkite hipotezę, kad Li2O kiekis abiejų rūšių pegmatituose nesiskiria.**\
+**c)Nubrėžkite Li2O ir ir Rb2O kiekio albitiniuose pegmantintuose sklaidos diagramą. Esant 1 % reikšmingumo lygmeniui, patikrinkite hipotezę, kad abiejų medžiagų kiekiai albitiniuose pegmatituose nepriklauso vienas nuo kito.**\
+**Sprendimas**\
+**a)**\
+Tereikia patikrinti, ar dispersijos yra lygios, tai mūsų\
+$H_0:\sigma^2_1=\sigma^2_2$\
+$H_1:\sigma^2_1\neq\sigma^2_2$
+```{r}
+var.test(albit$Rb20,spodum$Rb20)
+```
+Gauname, kad hipotezę atmetame su p-value$<\alpha=0.05$, nes dispersijos statistiškai skiriasi.\
+**b)**\
+Reikia patikrinti, kad kiekis nesiskiria $\to$ tikrinsime vidurkį (o gal sumą reikėtų?). Pirma tikriname, ar dydžiai pasiskirstę pagal normalųjį skirstinį:
+```{r}
+shapiro.test(albit$Li20)
+shapiro.test(spodum$Li20)
+```
+Gauname, kad abu dydžiai nėra pasiskirstę pagal N skirstinį, tačiau tęsiame darbą. Tikriname, ar dispersijos yra lygios:
+```{r}
+var.test(albit$Li20,spodum$Li20)
+```
+Gauname, kad su p-value$=0.1111>0.05=\alpha$ dispersijos statisstiškai reikšmingai nesiskiria viena nuo kitos. Tai:
+```{r}
+t.test(albit$Li20, spodum$Li20, var.equal = TRUE)
+```
+Gauname, kad su p-value$=0.7739>0.05=\alpha$ mūsų vidurkiai statistiškai reikšmingai nesiskiria, t.y. kiekis vienodas.\
+**c)**
+Patikrinkime, ar abiejų medžiagų kiekiai nepriklausomi albitiniuose pegmatituose ($H_0:kor=0$). Taigi
+```{r}
+cor.test(albit$Li20, albit$Rb20)
+cor.test(spodum$Li20, spodum$Rb20)
+```
+Tai galima teigti, kad pirmajame *dalyke* koreliacija labai didelė, p-value$<0.01=\alpha$, todėl galime teigti, kad priklausoma. Antrajmame koreliacija nedidelė, p-value$=0.6168>0.01=\alpha$, todėl priimame hipotezę.
