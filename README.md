@@ -10,3 +10,4 @@ Other courses that I had are:
 
 Below are some examples of data visualisation I did for various subjects:
 * ![Map for data visualisation](https://github.com/iLoveCepelinai/Studies/blob/Fourth-semester/Duomenu%20vizualizacija/LAB3/trecio_graf.png)
+* ![Random number generation](https://github.com/iLoveCepelinai/Studies/blob/Fourth-semester/Parametrine%20statistika/ND2_adGeneravimas/rand_gen_pic.jpg)
