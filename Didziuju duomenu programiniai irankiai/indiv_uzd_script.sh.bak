@@ -1,0 +1,3 @@
+#!/bin/sh
+#SBATCH -p short
+#SBATCH --ntasks=8
