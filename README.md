@@ -5,5 +5,8 @@ This was the most recent semester I had. One of the main subject was writing of 
 * Tikimybibniai masininio mokymosi algoritmai - Machine learning
 * Papildomi duomenu vizualizavimo skyriai - Aditional data visualisation course (mostly dimensionality reduction)
 * Regresine analize - Regression analysis
-## Quick links / images
+## Quick links
 * [The Thesis](https://github.com/iLoveCepelinai/Studies/blob/sixth-semester/Projektinis%20darbas/saules_elektrines_amsiejus_uzpelkis.pdf)
+
+## Images
+* ![Thesis scatter plot](https://github.com/iLoveCepelinai/Studies/blob/sixth-semester/Projektinis%20darbas/scatter_thesis.jpg)
