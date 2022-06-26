@@ -22,3 +22,4 @@ Data management I apply:
 
 Some data visualisation methods I used:
 * ![Data classification](https://github.com/iLoveCepelinai/Studies/blob/Fifth-semester/DI%20pagrindai/Uzduotis2/2sig_epoch.png)
+* ![Linear Regression plots](https://github.com/iLoveCepelinai/Studies/blob/Fifth-semester/Tiesiniai%20modeliai/Lab2/LR_plots.jpg)
