@@ -1,5 +1,6 @@
-# Studies
-## Introduction
-This repository is for tasks that I had to complete as a "Data Science" student during my bachelor's degree (2019-2023 (still ongoing)) in Vilnius University. These projects represent the minimum of what I can do. Most of the semesters will be seperated into branches, there you will find folders with subjects that I had during that semester.
-## Warning
-Most of the projects are in Lithuanian language. I will translate all names of the subjects in **readme** files of each semester branch.
+# Third semester
+In this semester I only had one practical course (Object-Oriented Programming) which has it's own multiple repositories (begins with "objektinis.."). This course features only C++ code, app creation and some optimization. Below are links to relavant repos:
+* [First part](https://github.com/iLoveCepelinai/Objektinis_programavimas)
+* [Second part](https://github.com/iLoveCepelinai/Objektinis_2dalis)
+* [Third part](https://github.com/iLoveCepelinai/Objektinis_3dalis)
+* [Exam](https://github.com/iLoveCepelinai/ObjektinioEgz)
