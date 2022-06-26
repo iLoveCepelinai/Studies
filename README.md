@@ -6,3 +6,4 @@ This was the most recent semester I had. One of the main subject was writing of 
 * Papildomi duomenu vizualizavimo skyriai - Aditional data visualisation course (mostly dimensionality reduction)
 * Regresine analize - Regression analysis
 ## Quick links / images
+* [The Thesis](https://github.com/iLoveCepelinai/Studies/blob/sixth-semester/Projektinis%20darbas/saules_elektrines_amsiejus_uzpelkis.pdf)
