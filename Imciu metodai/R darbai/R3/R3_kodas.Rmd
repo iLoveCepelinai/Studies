@@ -1,0 +1,163 @@
+---
+title: "Analizė naudojant R. 3 užduotis"
+author: "Matas Amšiejus"
+date: "4/24/2021"
+output:
+  pdf_document: default
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(readr)
+library(survey)
+```
+
+## 1.
+(41 pratimas 163. Pusl; forest.dat). Išrinkta paprastoji atsitiktinė didumo 2000 imtis.\
+a) Įvertinkite šešėlio (hillshade) 9 val. ryte ir vidurdienį (noon) santykį, raskite 95 % pasikliovimo intervalą.\
+b) Įvertinti kiekvieno tipo (cover type) miško aukštį (elevation), raskite 95 % pasikliovimo intervalą.\
+
+**Sprendimas**\
+**a)**
+Nuskaitome duomenis ir priskiriame pavadinimus:
+```{r}
+forest <- read.csv("forest.csv",header=F)
+names(forest)=c("Elevation","Aspect","Slope","Horiz","Vert","HorizRoad","Hillshade_9am","Hillshade_Noon","Hillshade 3pm","HorizFire","Wilderness1","Wilderness2","Wilderness3","Wilderness4","Cover")
+```
+Randame ir priskiriame populiacijos dydį. Randame imties elemento priklausymo imčiai tikimybę, tada ėmimo svorį ir priskiriame į lentelę.
+```{r}
+N<-nrow(forest)# populiacijos dydis
+n<-2000# imties dydis
+forest$N<-N
+pi_k<-n/N# imties elemento priklausymo imčiai tikimybė
+w<-1/pi_k# emimo svoris
+forest$w<-w
+```
+Imame paprastąją negražintinę atsitiktinę imtį su funkcija *sample*:
+```{r}
+forest_imtis <- forest[sample(N,n),]
+```
+Sudarome paprastosios atsitiktinės imties planą su paketu *SURVEY*:
+```{r}
+imties_planas<-svydesign(ids=~1, data = forest_imtis, weights = ~w, fpc = ~N)
+```
+Naudojame santykinio įvertinio funkciją (lygindami šešėlį 9 ryto ir vidurdienį) *svyratio*
+```{r}
+santykis<-svyratio(~Hillshade_9am, ~Hillshade_Noon, imties_planas);santykis
+```
+Randame 95% pasikliovimo inrervalą:
+```{r}
+confint(santykis,level = 0.95)
+```
+**b)**
+Įvertiname medžių aukštį pagal tipą (cover). svyby padeda suskirstyti pagal grupes, formula yra vertinamas dydis, by yra grupių skirstymo atributas, design yra imties planas, o FUN yra vertinimo būdas:
+```{r}
+aukstis<-svyby(formula = ~Elevation, by = ~Cover, design = imties_planas, FUN = svymean);aukstis
+```
+
+Ieškome 95% pasikliovimo intervalo:
+```{r}
+confint(aukstis,level = 0.95)
+```
+
+
+## 2.
+(42 pratimas 164 pusl.; vius.dat).\
+a) Kintamasis Business žymi pagrindinę komercinę veiklą, kuriai buvo naudotas sunkvežimis. Įvertinkite mylių skaičių kiekvienos komercinės veiklos atveju, raskite 95 % pasikliovimo intervalą.\
+b) Įvertinkite kiek vidutiniškai mylių galima nuvažiuoti su vienu galonu kuro (MPG) kiekvienam transmisijos tipui.\
+c) Apskaičiuokite santykį 2002 metais nuvažiuotų mylių (miles_annl) su per visą transporto priemonės naudojimo laiką nuvažiuotų mylių (miles_life) skaičiumi, raskite 95 % pasikliovimo intervalą.
+
+
+**Sprendimas**\
+**a)**
+Nuskaitome duomenis:
+```{r}
+vius<-read.csv("vius.csv")
+head(vius)
+```
+Randame ir priskiriame populiacijos dydį. Randame ėmimo svorį ir priskiriame į lentelę.
+```{r}
+N<-sum(vius$TABTRUCKS) # nezinau kodel, pdf aprase nepaaiskinta, ka reiskia TABTRUCKS, bet tarkime
+vius$N<-N
+w<-N/nrow(vius) # randame emimo svorius
+vius$w<-w
+```
+Sudarome ėmimo planą su paketu *Survey*:
+```{r}
+imties_planas2<-svydesign(ids=~1, data = vius, weights = ~w, fpc = ~N)
+```
+Kaip ir pirmoje užduotyje b dalyje naudojame svyby funkciją (*na.rm* (šiaip pagal aprašą turėtų būti na.rm.by, bet jis net neveikia) atmeta grupes kurios yra tuščia vertė (NA)):
+```{r}
+truck_business<-svyby(formula = ~MILES_LIFE, by = ~BUSINESS, design = imties_planas2, FUN = svytotal, na.rm=T);truck_business
+```
+Randame 95% pasikliovimo intervalą:
+```{r}
+confint(truck_business,level=0.95)
+```
+**b)**\
+Pirma susitvarkome duomenis, nes transmisija dabar yra skaičius, o MPG - raidinė vertė. Konvertuojame:
+```{r warning=FALSE}
+vius$TRANSMSSN <- as.character(vius$TRANSMSSN)
+vius$MPG <- as.numeric(vius$MPG)
+```
+
+Naudosime tą patį imties planą (tik paleisime iš naujo, nes reikia atnaujinti duomenis), o svyby dabar bus skirstoma pagal transmisiją, vertinamas bus MPG vidurkis:
+```{r}
+imties_planas2<-svydesign(ids=~1, data = vius, weights = ~w, fpc = ~N)
+svyby(~MPG,~TRANSMSSN,imties_planas2,svymean,na.rm=T)
+```
+**c)**
+Randame santykinį įvertinį su funkcija *svyratio*:
+```{r}
+truck_ratio<-svyratio(~MILES_ANNL,~MILES_LIFE,imties_planas2)
+```
+Randame jo pasikliovimo intervalą:
+```{r}
+confint(truck_ratio,level=0.95)
+```
+
+## 3.
+(43 pratimas 164 pusl.; baseball.dat). Išrinkite paprastąją atsitiktinę 150 žaidėjų imtį.\
+a) Įvertinkite vidutinį kiekvienos pozicijos žaidėjo atlyginimą, pateikite standartines paklaidas.\
+b) Įvertinkite kokią dalį visų taškų sudaro namuose surinkti taškai, raskite 95 % pasikliovimo intervalą.
+
+**Sprendimas**\
+**a)**\
+Nuskaitome, sutvarkome duomenis
+```{r}
+baseball<-read.csv("baseball.csv", header = F)
+names(baseball)[4]<-"Alga"#a) uzduociai
+names(baseball)[5]<-"Poz"
+names(baseball)[16]<-"Viso_taskai"#b) uzduociai
+names(baseball)[20]<-"HM_taskai"
+```
+Duomenims priskiriame populiaciją N ir imties svorį w (su imtimi n = 150):
+```{r}
+n<-150
+N<-nrow(baseball)
+baseball$N<-N
+w<-N/n
+baseball$w<-w
+```
+Sudarome 150 žaidėjų imtį:
+```{r}
+baseball_imtis<-baseball[sample(N, n), ]
+```
+Sukuriame imties planą:
+```{r}
+imties_planas3<-svydesign(ids=~1,data = baseball_imtis, weights = ~w, fpc = ~N)
+```
+Vertiname vidutinį žaidėjo atlyginimą (ir standaritinį nuokrypį) pagal poziciją:
+```{r}
+vid_alg<-svyby(~Alga, ~Poz, imties_planas3, svymean);vid_alg
+```
+**b)**
+Naudodami tą patį imties planą ieškome santykinio namų bazės taškų (HM) ir visų taškų įvertinio.
+```{r}
+taskai_sant<-svyratio(~HM_taskai, ~Viso_taskai, imties_planas3);taskai_sant
+```
+Tikriname pasikliautinį inrervalą (pasirodo numatytasis yra 95%):
+```{r}
+confint(taskai_sant)
+```

@@ -1,0 +1,68 @@
+R kodas ið 
+
+Baigt_populiaciju_stat_R_1dalis
+Baigt_populiaciju_stat_R_2dalis
+
+--------------------------------------------------------
+
+Didumas <- 20        
+Imtis_imones <- islaidos_gamtos_apsaugai [sample(1:nrow(islaidos_gamtos_apsaugai),
+ Didumas,  replace=FALSE),] 
+imtis_imones$EmimoTikimybe <- 20/84
+imtis_imones$EmimoSvoris   <- 1/imtis_imones$EmimoTikimybe
+
+------------------------------------------------------
+
+imties_planas <- svydesign( ids = ~1 , 
+ data = imtis_imones, weights = ~EmimoSvoris, fpc = ~N)
+
+sum(imtis_imones$EmimoSvoris)
+
+svymean(~Pajamos, imties_planas)
+
+svytotal(~Pajamos, imties_planas) 
+
+-------------------------------------------------------
+
+pajamos_suma_rez <- svytotal(~Pajamos, imties_planas, deff = TRUE)
+
+coef(pajamos_suma_rez)
+
+confint(pajamos_suma_rez)
+
+--------------------------------------------------------
+
+Rez_prop <- svyciprop(~kintamasis,  
+             imties_planas, method = "logit")
+
+--------------------------------------------------------
+
+rinkimai$N <- 676
+rinkimai_planas <- svydesign( ids = ~1 , data = rinkimai, weights = ~svoris, fpc = ~N)
+
+skaicius <- svytotal(~parasu_sk, rinkimai_planas) 
+confint(skaicius, level=0.8)
+
+--------------------------------------------------------
+
+676*CI.t.test(rinkimai$parasu_sk, conf.level = 0.8, fpc = 1-50/676)
+
+---------------------------------------------------------
+
+imties_planas <- svydesign( ids = ~1 , data = uzd_3_14_6, weights = ~svoris, fpc = ~tikimybe)
+
+----------------------------------------------------------
+
+svymean(~automobilis, subset(imties_planas, bustas==0))
+
+----------------------------------------------------------
+
+uzd_3_14_6$nuomoja <- ifelse(uzd_3_14_6$bustas==0, 1, 0)
+
+imties_planas <- svydesign( ids = ~1 , data = uzd_3_14_6, weights = ~svoris, fpc = ~tikimybe)
+
+svytotal(~nuomoja, subset(imties_planas, automobilis==0))
+
+svytotal(~nuomoja, subset(imties_planas, automobilis==0))
+            total        SE
+nuomoja 1738.4552 277.84728

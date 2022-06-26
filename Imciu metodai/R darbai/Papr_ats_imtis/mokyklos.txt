@@ -1,0 +1,6 @@
+Mokykla	1-4 kl. mokiniu	5-8 kl. mokiniu	9-12 kl. mokiniu
+1	400	300	200
+2	360	240	200
+3	200	160	140
+4	420	350	230
+
