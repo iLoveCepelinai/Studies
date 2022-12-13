@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "nlp-2-chatbot", "nlp-2-chatbot\nlp-2-chatbot.pyproj", "{AC4731D5-A002-4A52-9D5F-610F4AA9D125}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AC4731D5-A002-4A52-9D5F-610F4AA9D125}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC4731D5-A002-4A52-9D5F-610F4AA9D125}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D7E6C662-E4FA-4DA1-9AC9-F069044D2F46}
+	EndGlobalSection
+EndGlobal
